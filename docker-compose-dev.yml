@@ -1,0 +1,47 @@
+version: "3.1"
+
+services:
+  db-dev:
+    image: postgres:12
+    restart: always
+    container_name: brasil-db-dev
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: brasil
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "55454:5432"
+    networks:
+      - backend
+    volumes:
+      - db-server:/var/lib/postgresql/12/data
+
+  brasil-dev-server:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: brasil_app
+    restart: always
+    depends_on:
+      - db-dev
+    environment:
+      SERVER_PORT: 9090
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-dev:5432/brasil
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,address=*:5005,suspend=n
+    ports:
+      - "9099:9090"
+      - "5005:5005"
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+  backend:
+  payment:
+    driver: overlay
+
+volumes:
+  db-server:
