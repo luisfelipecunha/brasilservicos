@@ -3,6 +3,7 @@ package com.brasilservicos.demo.services.pedido.commands;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE)
 public class AddPedidoDeServicoCommand {
 	@NotNull
+	@Setter
 	UUID pedido;
 	@NotNull
 	UUID servico;

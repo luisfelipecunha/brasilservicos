@@ -9,6 +9,8 @@ import lombok.experimental.FieldDefaults;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+
 import static lombok.AccessLevel.PRIVATE;
 
 @Getter
@@ -21,5 +23,5 @@ public class CreateServicoCommand {
 	String nome;
 	@NotNull
 	@NonNull
-	Double valorHora;
+	BigDecimal valorHora;
 }

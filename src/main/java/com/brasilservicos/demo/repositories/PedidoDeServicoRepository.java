@@ -14,5 +14,5 @@ import java.util.UUID;
 public interface PedidoDeServicoRepository extends JpaRepository<PedidoDeServico, UUID> {
 	@Modifying
 	@Query("update PedidoDeServico set status = ?2 where id = ?1")
-	void updateStatus(UUID id, StatusDoPedidoDeServico finalizado);
+	PedidoDeServico updateStatus(UUID id, StatusDoPedidoDeServico finalizado);
 }
